@@ -7,22 +7,69 @@
 
 */
 
-const randomNumber = Math.floor(Math.random() * 3) + 1;
+function determineWinner(computerSelection, userSelection){
+    if(computerSelection === "rock" && userSelection === "scissors"){
+        return false;
+    }
+    else if(computerSelection === "paper" && userSelection == "rock"){
+        return false;
+    }
+    else if(computerSelection === "scissors" && userSelection === "paper"){
+        return false;
+    }
 
-let computerSelection;
+    else if(computerSelection === "rock" && userSelection === "paper"){
+        return true;
+    }
+    else if(computerSelection === "paper" && userSelection === "scissors"){
+        return true;
+    }
+    else if(computerSelection === "scissors" && userSelection === "rock"){
+        return true;
+    }
+}
 
-if(randomNumber === 1){
-    computerSelection = "rock";
-}
-if(randomNumber === 2){
-    computerSelection = "paper";
-}
-if(randomNumber === 3){
-    computerSelection = "scissors";
+function game(){
+    for(let i = 0; i < 5; i++){
+        
+        // gets random number between 1 and 3 inclusive
+        const randomNumber = Math.floor(Math.random() * 3) + 1;
+    
+        let computerSelection;
+    
+        // 1 is rock; 2 is paper and 3 is scissors
+        if(randomNumber === 1){
+            computerSelection = "rock";
+        }
+        if(randomNumber === 2){
+            computerSelection = "paper";
+        }
+        if(randomNumber === 3){
+            computerSelection = "scissors";
+        }
+    
+        //asking user for their chocie
+        let userSelection = prompt("Enter your move [rock, paper or scissors]").toLowerCase();
+    
+        //if choice is invalid, ask again
+        while(userSelection !== "rock" && userSelection !== "paper" && userSelection !== "scissors"){
+            userSelection = prompt("Please enter you choice again [rock, paper or scissors]")
+        }
+
+        if(userSelection === computerSelection){
+            console.log("It's a tie");
+            continue;
+        }
+    
+        playerWon = determineWinner(computerSelection, userSelection);
+
+        if(playerWon){
+            console.log("Congrats! You won")
+        }
+        else{
+            console.log("Sorry you lost this game")
+        }
+    }
 }
 
-let userSelection = prompt("Enter your move [rock, paper or scissors]").toLowerCase();
-
-while(userSelection !== "rock" && userSelection !== "paper" && userSelection !== "scissors"){
-    userSelection = prompt("Please enter you choice again [rock, paper or scissors]")
-}
+game();
