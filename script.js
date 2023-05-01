@@ -10,24 +10,12 @@
 function userWins(computerSelection, userSelection){
 
     //returns true if user wins else false
-    if(computerSelection === "rock" && userSelection === "scissors"){
+    if((computerSelection === "rock" && userSelection === "scissors") || (computerSelection === "paper" && userSelection == "rock") || (computerSelection === "scissors" && userSelection === "paper")){
         return false;
-    }
-    else if(computerSelection === "paper" && userSelection == "rock"){
-        return false;
-    }
-    else if(computerSelection === "scissors" && userSelection === "paper"){
-        return false
     }
 
-    else if(computerSelection === "rock" && userSelection === "paper"){
+    else if((computerSelection === "rock" && userSelection === "paper") || (computerSelection === "paper" && userSelection === "scissors") || (computerSelection === "scissors" && userSelection === "rock")){
         return true
-    }
-    else if(computerSelection === "paper" && userSelection === "scissors"){
-        return true;
-    }
-    else if(computerSelection === "scissors" && userSelection === "rock"){
-        return true;
     }
 }
 
@@ -51,10 +39,7 @@ function game(){
     let computerWinCount = 0;
     for(let i = 0; i < 5; i++){
         
-        // gets random number between 1 and 3 inclusive
         const computerSelection = getComputerChoice();
-    
-        //asking user for their chocie
         const userSelection = prompt("Enter your move [rock, paper or scissors]").toLowerCase();
     
         //if choice is invalid, ask again
@@ -66,7 +51,6 @@ function game(){
             console.log("It's a tie");
             continue;
         }
-
         else if(userWins(computerSelection, userSelection)){
             userWinCount++;
             console.log(`Computer chose ${computerSelection}, you won`);
