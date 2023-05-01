@@ -7,30 +7,27 @@
 
 */
 
-function playGame(computerSelection, userSelection){
+function userWins(computerSelection, userSelection){
 
-    if(userSelection === computerSelection){
-        return "It's a tie";
-    }
-
+    //returns true if user wins else false
     if(computerSelection === "rock" && userSelection === "scissors"){
-        return "Oops! Computer chose rock, you lose";
+        return false;
     }
     else if(computerSelection === "paper" && userSelection == "rock"){
-        return "Oops! Computer chose paper, you lose";
+        return false;
     }
     else if(computerSelection === "scissors" && userSelection === "paper"){
-        return "Oops! Computer chose scissors, you lose";
+        return false
     }
 
     else if(computerSelection === "rock" && userSelection === "paper"){
-        return "Congrats! Computer chose rock, you won";
+        return true
     }
     else if(computerSelection === "paper" && userSelection === "scissors"){
-        return "Congrats! Computer chose paper, you won";
+        return true;
     }
     else if(computerSelection === "scissors" && userSelection === "rock"){
-        return "Congrats! Computer chose scissors, you won";
+        return true;
     }
 }
 
@@ -50,21 +47,48 @@ function getComputerChoice() {
 }
 
 function game(){
+    let userWinCount = 0;
+    let computerWinCount = 0;
     for(let i = 0; i < 5; i++){
         
         // gets random number between 1 and 3 inclusive
         const computerSelection = getComputerChoice();
     
         //asking user for their chocie
-        let userSelection = prompt("Enter your move [rock, paper or scissors]").toLowerCase();
+        const userSelection = prompt("Enter your move [rock, paper or scissors]").toLowerCase();
     
         //if choice is invalid, ask again
         while(userSelection !== "rock" && userSelection !== "paper" && userSelection !== "scissors"){
             userSelection = prompt("Please enter you choice again [rock, paper or scissors]")
         }
 
-        console.log(playGame(computerSelection, userSelection));
+        if(userSelection === computerSelection){
+            console.log("It's a tie");
+            continue;
+        }
+
+        else if(userWins(computerSelection, userSelection)){
+            userWinCount++;
+            console.log(`Computer chose ${computerSelection}, you won`);
+        }
+        else{
+            computerWinCount++;
+            console.log(`Computer chose ${computerSelection}, you lost`);
+        }
+
+        console.log(`Current score: You: ${userWinCount}, Computer: ${computerWinCount}`);
     }
+    
+    if(userWinCount > computerWinCount){
+        console.log(`Congratulations! You won ${userWinCount} matches out of 5. You win!`);
+    }
+    else if(computerWinCount > userWinCount) {
+        console.log(`Sorry... the computer won ${computerWinCount} matches out of 5. You lose.`);
+    }
+    else{
+        console.log("Nobody wins! It's a tie!");
+    }
+
 }
 
-game();
+game()
