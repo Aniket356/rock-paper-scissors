@@ -7,25 +7,30 @@
 
 */
 
-function determineWinner(computerSelection, userSelection){
+function playGame(computerSelection, userSelection){
+
+    if(userSelection === computerSelection){
+        return "It's a tie";
+    }
+
     if(computerSelection === "rock" && userSelection === "scissors"){
-        return false;
+        return "Oops! Computer chose rock, you lose";
     }
     else if(computerSelection === "paper" && userSelection == "rock"){
-        return false;
+        return "Oops! Computer chose paper, you lose";
     }
     else if(computerSelection === "scissors" && userSelection === "paper"){
-        return false;
+        return "Oops! Computer chose scissors, you lose";
     }
 
     else if(computerSelection === "rock" && userSelection === "paper"){
-        return true;
+        return "Congrats! Computer chose rock, you won";
     }
     else if(computerSelection === "paper" && userSelection === "scissors"){
-        return true;
+        return "Congrats! Computer chose paper, you won";
     }
     else if(computerSelection === "scissors" && userSelection === "rock"){
-        return true;
+        return "Congrats! Computer chose scissors, you won";
     }
 }
 
@@ -58,19 +63,7 @@ function game(){
             userSelection = prompt("Please enter you choice again [rock, paper or scissors]")
         }
 
-        if(userSelection === computerSelection){
-            console.log("It's a tie");
-            continue;
-        }
-    
-        playerWon = determineWinner(computerSelection, userSelection);
-
-        if(playerWon){
-            console.log("Congrats! You won")
-        }
-        else{
-            console.log("Sorry you lost this game")
-        }
+        console.log(playGame(computerSelection, userSelection));
     }
 }
 
