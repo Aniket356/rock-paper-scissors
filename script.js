@@ -29,24 +29,26 @@ function determineWinner(computerSelection, userSelection){
     }
 }
 
+function getComputerChoice() {
+    const randomNumber = Math.floor(Math.random() * 3) + 1;
+
+    // 1 is rock; 2 is paper and 3 is scissors
+    if(randomNumber === 1){
+        return "rock"
+    }
+    if(randomNumber === 2){
+        return "paper"
+    }
+    if(randomNumber === 3){
+        return "scissors";
+    }
+}
+
 function game(){
     for(let i = 0; i < 5; i++){
         
         // gets random number between 1 and 3 inclusive
-        const randomNumber = Math.floor(Math.random() * 3) + 1;
-    
-        let computerSelection;
-    
-        // 1 is rock; 2 is paper and 3 is scissors
-        if(randomNumber === 1){
-            computerSelection = "rock";
-        }
-        if(randomNumber === 2){
-            computerSelection = "paper";
-        }
-        if(randomNumber === 3){
-            computerSelection = "scissors";
-        }
+        const computerSelection = getComputerChoice();
     
         //asking user for their chocie
         let userSelection = prompt("Enter your move [rock, paper or scissors]").toLowerCase();
